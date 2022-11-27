@@ -1,11 +1,43 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { exec } from "child_process"
 
+import functions from '../../data/module/functions'
+
+const { consoleTextColor } = functions
+
+
 let nowPassword = ""
 const password = "Ldokdlidk_YT"
 
 const Prefix = "-"
 const getdataPrefix = "?"
+
+function Reply(res: NextApiResponse, type: string, message: string, code: string) {
+  let colorList:
+    "Black"
+    | "Red"
+    | "Green"
+    | "Yellow"
+    | "Blue"
+    | "Magenta"
+    | "Cyan"
+    | "White"
+
+  const TimeColor: typeof colorList = "Green"
+
+  const TypeColor: typeof colorList = "Yellow"
+
+  const CodeColor: typeof colorList = "Blue"
+
+  console.log(
+    `${consoleTextColor(TimeColor, `[ ${consoleTextColor("Blue", Date(), TimeColor)} / ${consoleTextColor("Red", new Date().getTime(), TimeColor)} ]`)}`,
+    `${consoleTextColor(TypeColor, `( ${consoleTextColor('Green', type, TypeColor)} )`)}`,
+    `${message}`,
+    `${consoleTextColor(CodeColor, `( ${consoleTextColor('Red', code, CodeColor)} )`)}`
+  )
+  
+  res.status(200).json({ type: type, message: message, code: code })
+}
 
 export default function hendler(req: NextApiRequest, res: NextApiResponse) {
   if (req.body.startsWith(Prefix) || req.body.startsWith(getdataPrefix)) {
@@ -15,25 +47,22 @@ export default function hendler(req: NextApiRequest, res: NextApiResponse) {
 
       //login
       if (command.startsWith("login")) {
-        // if (nowPassword == password) {
-        //   return
-        // }
 
         nowPassword = command.slice(("login ").length)
 
         if (nowPassword == password) {
-          res.status(200).json({ type: "login", message: "oh yeh you login!", code: "Login" })
+          Reply(res, "login", "oh yeh you login!", "Login")
           return
         }
 
-        res.status(200).json({ type: "login", message: "password not correct", code: "!Login" })
+        Reply(res, "login", "password not correct", "!Login")
       } else
         //logout
         if (command.startsWith("logout")) {
           nowPassword = ""
-          res.status(200).json({ type: "logout", content: "ok done", code: "isLogout" })
+          Reply(res, "logout", "ok done", "isLogout")
         } else {
-          res.status(200).json({ type: "error", message: "unknow-commsnd", code: "unkcmd" })
+          Reply(res, "error", "unknow-commsnd", "unkcmd")
         }
     } else if (req.body.startsWith(getdataPrefix)) {
       let command = req.body.slice(getdataPrefix.length)
@@ -41,20 +70,20 @@ export default function hendler(req: NextApiRequest, res: NextApiResponse) {
       //isLogin
       if (command.startsWith("isLogin")) {
         if (nowPassword == password) {
-          res.status(200).json({ type: "isLogin?", message: "yes, you login", code: "isLogin" })
+          Reply(res, "isLogin?", "yes, you login", "isLogin")
           return
         }
-        res.status(200).json({ type: "isLogin?", message: "no, you not login", code: "!isLogin" })
+        Reply(res, "isLogin?", "no, you not login", "!isLogin")
       } else {
-        res.status(200).json({ type: "error", message: "unknow-commsnd", code: "unkcmd" })
+        Reply(res, "error", "unknow-commsnd", "unkcmd")
       }
     }
   } else {
     if (nowPassword == password) {
       exec("powershell " + req.body)
-      res.status(200).json({ type: "commandline", path: req.body, code: "isOk" });
+      Reply(res, "commandline", req.body, "isOk")
       return
     }
-    res.status(200).json({ type: "commandline", message: "you don`t have a permissions", code: "notPermissions" })
+    Reply(res, "commandline", "you don`t have a permissions", "notPermissions")
   }
 }

@@ -65,7 +65,6 @@ $size: 64px;
   .icon {
     width: $size + 15px;
     height: $size - 10px;
-    // clip-path: polygon(10% 0, 100% 0%, 90% 100%, 0% 100%);
     border-bottom: 3px solid Color(.5);
   }
 
@@ -81,6 +80,31 @@ $size: 64px;
 }
 
 .mainButton[btn-sty="bar"]:active {
+  .icon {
+    border-color: Color(.3);
+  }
+}
+
+.mainButton[btn-sty="power"] {
+  .icon {
+    width: $size;
+    height: $size;
+    clip-path: polygon(0 0, 100% 5%, 100% 100%, 0 95%);
+    border-left: 4px solid Color(.5);
+  }
+
+  .title {
+    display: none;
+  }
+}
+
+.mainButton[btn-sty="power"]:hover {
+  .icon {
+    border-color: Color();
+  }
+}
+
+.mainButton[btn-sty="power"]:active {
   .icon {
     border-color: Color(.3);
   }
