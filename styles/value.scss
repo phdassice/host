@@ -1,0 +1,31 @@
+@use "sass:map";
+
+$blur-effect:50px;
+
+$theme-color-r: 0;
+$theme-color-g: 0;
+$theme-color-b: 255;
+
+
+
+@function Color($num : 1, $opacit : 1) {
+    @return rgba($theme-color-r * $num, $theme-color-g * $num, $theme-color-b* $num, $opacit );
+}
+
+@function LightColor($num : 1, $opacit : 1) {
+    @return rgba($theme-color-r + (255 * $num ), $theme-color-g + (255 * $num ), $theme-color-b + (255 * $num ), $opacit );
+}
+
+$transition-duration: .4s;
+$transition-delay: 0s;
+$transition-timing-function: cubic-bezier(0, .5, 0, 1);
+
+@function Transition($duration : $transition-duration, $delay: $transition-delay, $timing-function : $transition-timing-function) {
+    @return $duration $timing-function $delay;
+}
+
+
+
+$cubic-bezier-1: cubic-bezier(0, 1, 0, 1);
+$cubic-bezier-2: cubic-bezier(1, 0, 0, 1);
+$cubic-bezier-3: cubic-bezier(0, 1, 1, 0);

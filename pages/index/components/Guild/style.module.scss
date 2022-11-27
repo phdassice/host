@@ -1,0 +1,21 @@
+@import "../../../../styles/value.scss";
+
+.Guild {
+  margin-bottom: 10px;
+  backdrop-filter: blur($blur-effect);
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: Color(.1,.3);
+
+  .title {
+    background-color: #0002;
+    padding: 5px 30px;
+    font-size: 15px;
+    text-align: center;
+  }
+
+  .children {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

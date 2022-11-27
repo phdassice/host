@@ -1,0 +1,172 @@
+@import "value.scss";
+a[kilo-style] {
+    text-decoration: none;
+    padding: 3px 20px 1px 20px;
+    background: none;
+    border-radius: 5px;
+    background: Color(.4);
+    border-bottom: 2px solid Color();
+    font-size: 18px;
+}
+
+a[kilo-style][solid] {
+    padding: 3px 20px 1px 20px;
+    display: inline-block;
+    margin: 5px 5px;
+}
+
+a[kilo-style]:hover {
+    color: Color();
+    background: Color(.7);
+    border-bottom: 2px solid Color();
+    text-shadow: 0 0 10px Color();
+}
+
+a[kilo-style]:active {
+    background: Color(.4);
+    border-bottom: 2px solid Color(.7);
+}
+
+
+button[kilo-style] {
+    font-size: 16px;
+    padding: 5px 50px;
+    border-radius: 5px;
+    background: Color(.5);
+    border: none;
+}
+
+button[kilo-style][solid] {
+    margin: 5px 0;
+}
+
+button[kilo-style]:hover {
+    color: Color();
+    background: Color(.7);
+    text-shadow: 0 0 10px Color();
+}
+
+button[kilo-style]:active {
+    background: Color(.4);
+}
+
+textarea[kilo-style] {
+    background-color: Color(.7);
+    border: none;
+    padding: 5px 10px;
+    margin: 0 10px;
+    font-size: 15px;
+    border-radius: 5px;
+    outline: none;
+    color: Color();
+}
+
+textarea[kilo-style]:hover {
+    background-color: Color(.4);
+    transform: scale(1.05);
+    text-shadow: 0 0 10px Color();
+}
+
+textarea[kilo-style]:focus {
+    box-shadow: 0 0 10px Color(.08);
+    background-color: Color(.7);
+    text-shadow: none;
+    transform: scale(1.1);
+    color: #fff;
+}
+
+textarea[kilo-style]::placeholder {
+    transition: defuleTransition();
+    color: Color();
+    opacity: .5;
+}
+
+textarea[kilo-style]:hover::placeholder {
+    opacity: .6;
+}
+
+textarea[kilo-style]:focus::placeholder {
+    opacity: .7;
+    text-shadow: 0 0 10px Color(.08);
+}
+
+textarea[kilo-style]:read-only {
+    text-align: center;
+    width: 250px;
+    color: Color();
+}
+
+textarea[kilo-style]:read-only:focus {
+    box-shadow: 0 0 10px Color(.08);
+    text-shadow: 0 0 10px Color();
+    transform: scale(1.1) rotate(1deg);
+}
+
+input[kilo-style] {
+    margin: 5px;
+}
+
+input[kilo-style]:disabled {
+    cursor: no-drop;
+}
+
+input[kilo-style]:disabled {
+    opacity: .5;
+}
+
+input[kilo-style]:disabled:hover {
+    opacity: .6;
+}
+
+
+input[kilo-style][type="text"] {
+    background-color: Color(.7);
+    border: none;
+    padding: 5px 10px;
+    margin: 0 10px;
+    font-size: 15px;
+    border-radius: 5px;
+    outline: none;
+    color: Color();
+}
+
+input[kilo-style][type="text"]:hover {
+    background-color: Color(.4);
+    transform: scale(1.05);
+    text-shadow: 0 0 10px Color();
+}
+
+input[kilo-style][type="text"]:focus {
+    box-shadow: 0 0 10px Color(.08);
+    background-color: Color(.5);
+    text-shadow: none;
+    transform: scale(1.1);
+    color: #fff;
+}
+
+input[kilo-style][type="text"]::placeholder {
+    transition: Transition();
+    color: Color();
+    opacity: .5;
+}
+
+input[kilo-style][type="text"]:hover::placeholder {
+    opacity: .6;
+}
+
+input[kilo-style][type="text"]:focus::placeholder {
+    opacity: .7;
+    text-shadow: 0 0 10px Color(.08);
+}
+
+input[kilo-style][type="text"]:read-only {
+    text-align: center;
+    width: 250px;
+    color: Color();
+}
+
+input[kilo-style][type="text"]:read-only:focus {
+    box-shadow: 0 0 10px Color(.08);
+    text-shadow: 0 0 10px Color();
+    transform: scale(1.1) rotate(1deg);
+}

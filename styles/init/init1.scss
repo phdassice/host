@@ -1,0 +1,33 @@
+@import "value.scss";
+
+::selection{
+    background: Color(.3,.8);
+    color: LightColor(.5);
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: none;
+}
+
+::-webkit-scrollbar-thumb {
+    background: Color(.7);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: Color();
+}
+
+:focus-visible {
+    outline: 2px solid Color();
+}
+
+[overflow-bar-none]::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
