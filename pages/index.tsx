@@ -195,7 +195,7 @@ const Main: NextPage = () => {
         <div className={style.main}>
           <div className={style.main} overflow-bar-none="">
             <Guild title='常用'>
-              <MainButtonMainEz title='Epic game' cml='start fl'>
+              <MainButtonMainEz title='Epic game' cml='start Epic'>
                 <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M11 44q-1.2 0-2.1-.9Q8 42.2 8 41V7q0-1.2.9-2.1Q9.8 4 11 4h16.8q.6 0 1.175.25.575.25.975.65l9.15 9.15q.4.4.65.975T40 16.2V41q0 1.2-.9 2.1-.9.9-2.1.9Zm16.55-29.2V7H11v34h26V16.3h-7.95q-.65 0-1.075-.425-.425-.425-.425-1.075ZM11 7v9.3V7v34V7Z" /></svg>
               </MainButtonMainEz>
               <MainButtonMainEz title='Visual Studio Code' cml='start code'>
@@ -204,7 +204,7 @@ const Main: NextPage = () => {
               <MainButtonMainEz title='Dicodrd' cml='C:/Users/user/AppData/Local/Discord/Update.exe --processStart Discord.exe'>
                 <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M11 44q-1.2 0-2.1-.9Q8 42.2 8 41V7q0-1.2.9-2.1Q9.8 4 11 4h16.8q.6 0 1.175.25.575.25.975.65l9.15 9.15q.4.4.65.975T40 16.2V41q0 1.2-.9 2.1-.9.9-2.1.9Zm16.55-29.2V7H11v34h26V16.3h-7.95q-.65 0-1.075-.425-.425-.425-.425-1.075ZM11 7v9.3V7v34V7Z" /></svg>
               </MainButtonMainEz>
-              <MainButtonMainEz title='VMBox' cml='start VirtualBox.exe'>
+              <MainButtonMainEz title='VMBox不可用' cml='start VirtualBox.exe'>
                 <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M11 44q-1.2 0-2.1-.9Q8 42.2 8 41V7q0-1.2.9-2.1Q9.8 4 11 4h16.8q.6 0 1.175.25.575.25.975.65l9.15 9.15q.4.4.65.975T40 16.2V41q0 1.2-.9 2.1-.9.9-2.1.9Zm16.55-29.2V7H11v34h26V16.3h-7.95q-.65 0-1.075-.425-.425-.425-.425-1.075ZM11 7v9.3V7v34V7Z" /></svg>
               </MainButtonMainEz>
             </Guild>
