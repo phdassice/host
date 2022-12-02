@@ -5,11 +5,14 @@ import style from "../styles/other/components.module.scss"
 
 interface InnerContentProp {
     children?: ReactNode
+    dangerouslySetInnerHTML?: {
+        __html: string;
+      }
 }
 
 const InnerContent: NextPage<InnerContentProp> = (Prop) => {
     return (
-        <span className={style.InnerContent}>
+        <span className={style.InnerContent} dangerouslySetInnerHTML={Prop.dangerouslySetInnerHTML}>
             {Prop.children}
         </span>
     );

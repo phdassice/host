@@ -1,17 +1,18 @@
 @import "../styles/value.scss";
 
-#Frame {
+
+#coolEffectFrame {
+  transition: .5s;
+  opacity: 0;
+  filter: blur(50px);
   width: 100%;
   height: 100%;
   transform: translate(-50%, -50%);
   position: absolute;
   top: 50%;
   left: 50%;
-  overflow: hidden;
-
-  $cool-window-transition: .8s cubic-bezier(.45, 0, 0, 1) 0s,
-  opacity .4s cubic-bezier(.5, 0, 1, 0) .1s;
-  $cool-window-transition-close: 1s cubic-bezier(.45, 0, 0, 1);
+  background-color: #000;
+  pointer-events: none;
 
   display: grid;
   grid-template-areas: "area";
@@ -21,24 +22,68 @@
     overflow: hidden;
   }
 
-  >.mainScreen {
-    z-index: 1;
-    transition: $cool-window-transition-close;
-    border-radius: 10px;
-    transform: scale(.8);
-    opacity: 0;
-    pointer-events: none;
+  >.bg {
+    opacity: .8;
+    transition: opacity 1s, transform Transition();
+    transform: scale(1.08);
     display: grid;
     grid-template-areas: "area";
 
     >* {
       grid-area: area;
+      overflow: hidden;
     }
 
-    >.bg {
+    >.mainBg,
+    >.lockBg {
+      transition: none;
       background-size: cover;
       background-position: center;
+    }
 
+    >.mianBg {
+      opacity: 0;
+    }
+  }
+}
+
+#Frame {
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  overflow: hidden;
+  display: grid;
+  grid-template-areas: "area";
+
+  >.frame {
+    transition: .5s cubic-bezier(0, 1, .5, 1), transfrom .5s;
+    overflow: hidden;
+    background-color: Color(.07, .5);
+    backdrop-filter: blur($blur-effect);
+
+    $cool-window-transition: .8s cubic-bezier(.45, 0, 0, 1) 0s,
+    opacity .4s cubic-bezier(.5, 0, 1, 0) .1s;
+    $cool-window-transition-close: 1s cubic-bezier(.45, 0, 0, 1);
+
+    grid-area: area;
+    display: grid;
+    grid-template-areas: "area";
+
+    >* {
+      grid-area: area;
+      overflow: hidden;
+    }
+
+    >.mainScreen {
+      z-index: 1;
+      transition: $cool-window-transition-close;
+      border-radius: 10px;
+      transform: scale(.8);
+      opacity: 0;
+      pointer-events: none;
       display: grid;
       grid-template-areas: "area";
 
@@ -46,354 +91,414 @@
         grid-area: area;
       }
 
-      .filter {
-        background: rgba(0, 0, 0, 0);
-        background: radial-gradient(circle, rgba(0, 0, 0, .1) 0%, rgba(0, 0, 0, 0.3) 100%);
-      }
-    }
+      >.bg {
+        background-size: cover;
+        background-position: center;
 
-    >.main {
-      display: grid;
-      grid-template-rows: 1fr auto;
-      overflow: hidden;
-
-      >.main {
-        transition: 1.5s;
-        transform: translateY(-100%);
-        margin: 5px;
-        overflow: auto;
-        border-radius: 10px;
-      }
-
-      >.bar {
-        transition: 1.5s;
-        transform: translateY(100%);
         display: grid;
         grid-template-areas: "area";
-        backdrop-filter: blur($blur-effect);
-        background-color: Color(.1, .3);
+
+        >* {
+          grid-area: area;
+        }
+
+        .filter {
+          background: rgba(0, 0, 0, 0);
+          background: radial-gradient(circle, rgba(0, 0, 0, .1) 0%, rgba(0, 0, 0, 0.3) 100%);
+        }
+      }
+
+      >.main {
+        display: grid;
+        grid-template-rows: 1fr auto;
         overflow: hidden;
 
-        >div {
-          overflow: hidden;
+        >.main {
+          transition: 1.5s;
+          transform: translateY(-100%);
           margin: 5px;
-          border-radius: 5px;
-          grid-area: area;
+          overflow: auto;
+          border-radius: 10px;
+        }
+
+        >.bar {
+          transition: 1.5s;
+          transform: translateY(100%);
           display: grid;
-          grid-template-columns: 1fr auto;
+          grid-template-areas: "area";
+          backdrop-filter: blur($blur-effect);
+          background-color: Color(.1, .3);
+          overflow: hidden;
 
           >div {
-            display: flex;
-            align-items: center;
-          }
-
-          >.other {
             overflow: hidden;
+            margin: 5px;
             border-radius: 5px;
-            background-color: Color(.1, .1);
+            grid-area: area;
+            display: grid;
+            grid-template-columns: 1fr auto;
+
+            >div {
+              display: flex;
+              align-items: center;
+            }
+
+            >.other {
+              overflow: hidden;
+              border-radius: 5px;
+              background-color: Color(.1, .1);
+            }
           }
+        }
+      }
+
+      >.power {
+        transition: 1s;
+        opacity: 0;
+        pointer-events: none;
+        backdrop-filter: blur($blur-effect);
+        background-color: Color(.08, .5);
+        display: grid;
+        grid-template-columns: auto 1fr;
+
+        >.bar {
+          transition: 1.5s;
+          transition: .5s ease-in;
+          transform: translateX(-100%);
+          backdrop-filter: blur($blur-effect);
+          background-color: Color(.1, .3);
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+      }
+
+      >.power.show {
+        transition: Transition();
+        opacity: 1;
+        pointer-events: all;
+
+        >.bar {
+          transition: .5s cubic-bezier(0, .5, 0, 1);
+          transform: none;
+        }
+      }
+
+    }
+
+    >.mainScreen.pe {
+      pointer-events: all;
+    }
+
+    >.mainScreen.show {
+      transition: $cool-window-transition;
+      border-radius: 0px;
+      transform: none;
+      opacity: 1;
+
+      >.main {
+        >.main {
+          transform: none;
+        }
+
+        >.bar {
+          transform: none;
         }
       }
     }
 
-    >.power {
+
+    >.lockScreen {
+      z-index: 2;
+      transition: $cool-window-transition-close;
+      transform: scale(.8);
       opacity: 0;
       pointer-events: none;
-      backdrop-filter: blur($blur-effect);
-      background-color: Color(.08, .3);
       display: grid;
-      grid-template-columns: auto 1fr;
-
-      >.bar {
-        transition: 1.5s;
-        transition: 1s ease-in;
-        transform: translateX(-100%);
-        backdrop-filter: blur($blur-effect);
-        background-color: Color(.1, .3);
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-    }
-
-    >.power.show {
-      opacity: 1;
-      pointer-events: all;
-
-      >.bar {
-        transition: .5s cubic-bezier(0, .5, 0, 1);
-        transform: none;
-      }
-    }
-
-  }
-
-  >.mainScreen.pe {
-    pointer-events: all;
-  }
-
-  >.mainScreen.show {
-    transition: $cool-window-transition;
-    border-radius: 0px;
-    transform: none;
-    opacity: 1;
-
-    >.main {
-      >.main {
-        transform: none;
-      }
-
-      >.bar {
-        transform: none;
-      }
-    }
-  }
-
-
-  >.lockScreen {
-    z-index: 2;
-    transition: $cool-window-transition-close;
-    transform: scale(.8);
-    opacity: 0;
-    pointer-events: none;
-    display: grid;
-    border-radius: 10px;
-    grid-template-areas: "area";
-
-    >* {
-      grid-area: area;
-    }
-
-    >.bg {
-      background-size: cover;
-      background-position: center;
-
-      display: grid;
+      border-radius: 10px;
       grid-template-areas: "area";
 
       >* {
         grid-area: area;
       }
 
-      .filter {
-        background: rgba(0, 0, 0, 0);
-        background: radial-gradient(circle, rgba(0, 0, 0, .1) 0%, rgba(0, 0, 0, 0.3) 100%);
+      >.bg {
+        background-size: cover;
+        background-position: center;
+
+        display: grid;
+        grid-template-areas: "area";
+
+        >* {
+          grid-area: area;
+        }
+
+        .filter {
+          background: rgba(0, 0, 0, 0);
+          background: radial-gradient(circle, rgba(0, 0, 0, .1) 0%, rgba(0, 0, 0, 0.3) 100%);
+        }
       }
-    }
 
-    .main {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      $cool-transition: .5s cubic-bezier(.5, 0, 1, 0) 0s,
-      opacity .4s cubic-bezier(.5, 0, 1, 0) .1s;
-
-      >div {
-        transition: $cool-transition;
+      .main {
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-direction: column;
-        height: 400px;
-        width: 800px;
-        background-color: #0007;
-        border: 5px solid #000;
-        border-radius: 10px;
-        backdrop-filter: blur($blur-effect);
-        transform: scale(.8);
-        opacity: 0;
 
-        .avatar {
+        $cool-transition: .5s cubic-bezier(.5, 0, 1, 0) 0s,
+        opacity .4s cubic-bezier(.5, 0, 1, 0) .1s;
+
+        >div {
           transition: $cool-transition;
-          transform: scale(.8);
-          opacity: 0;
-          $size: 180px;
-          width: $size;
-          height: $size;
-          background-size: cover;
-          background-position: center;
-          border-radius: 50%;
-          margin-bottom: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+          height: 400px;
+          width: 800px;
+          background-color: #0007;
           border: 5px solid #000;
-        }
-
-        .name {
+          border-radius: 10px;
+          backdrop-filter: blur($blur-effect);
           transform: scale(.8);
           opacity: 0;
-          font-size: 30px;
-          margin-bottom: 10px;
-        }
 
-        >.input {
-          transition: $cool-transition;
-          transform: translateY(100%) scale(.5);
-          opacity: 0;
-          border: 3px solid #000;
-          background-color: #0005;
-          border-radius: 10px;
-          overflow: hidden;
-          display: grid;
-          grid-template-columns: 1fr auto;
-
-          >input {
+          .avatar {
             transition: $cool-transition;
-            transform: translateX(-100%);
-            background: none;
-            border: none;
-            padding: 5px 20px;
-            width: 400px;
-            font-size: 20px;
-            outline: none;
-          }
-
-          .send {
-            transition: $cool-transition;
-            transform: translateX(100%);
-            background: none;
-            border: none;
-            margin: 0;
-            border-left: 3px solid #000;
-            padding: 0 20px;
-            fill: #fff;
-
-            >svg {
-              transform: scale(1.2);
-            }
-          }
-
-          .send:hover {
-            background-color: #0005;
-
-            >svg {
-              transform: scale(1.5);
-            }
-          }
-
-          .send:active {
-            >svg {
-              filter: brightness(.5);
-              transform: scale(1.1);
-            }
-          }
-        }
-
-        >.tips {
-          transform: translateY(100%);
-          opacity: 0;
-          transition: $cool-transition;
-          display: grid;
-          grid-template-areas: "area";
-          margin-top: 10px;
-
-          >* {
-            grid-area: area;
-            font-size: 20px;
+            transform: scale(.8);
             opacity: 0;
-            pointer-events: none;
+            $size: 180px;
+            width: $size;
+            height: $size;
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            border: 5px solid #000;
           }
 
-          >.y {
-            color: #0f0;
+          .name {
+            transform: scale(.8);
+            opacity: 0;
+            font-size: 30px;
+            margin-bottom: 10px;
           }
 
-          >.n {
-            color: #f00;
+          >.input {
+            transition: $cool-transition;
+            transform: translateY(100%) scale(.5);
+            opacity: 0;
+            border: 3px solid #000;
+            background-color: #0005;
+            border-radius: 10px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr auto;
+
+            >input {
+              transition: $cool-transition;
+              transform: translateX(-100%);
+              background: none;
+              border: none;
+              padding: 5px 20px;
+              width: 400px;
+              font-size: 20px;
+              outline: none;
+            }
+
+            .send {
+              transition: $cool-transition;
+              transform: translateX(100%);
+              background: none;
+              border: none;
+              margin: 0;
+              border-left: 3px solid #000;
+              padding: 0 20px;
+              fill: #fff;
+
+              >svg {
+                transform: scale(1.2);
+              }
+            }
+
+            .send:hover {
+              background-color: #0005;
+
+              >svg {
+                transform: scale(1.5);
+              }
+            }
+
+            .send:active {
+              >svg {
+                filter: brightness(.5);
+                transform: scale(1.1);
+              }
+            }
           }
 
-        }
+          >.tips {
+            transform: translateY(100%);
+            opacity: 0;
+            transition: $cool-transition;
+            display: grid;
+            grid-template-areas: "area";
+            margin-top: 10px;
 
-        >.tips.y {
-          >.y {
-            opacity: 1;
-            pointer-events: all;
+            >* {
+              grid-area: area;
+              font-size: 20px;
+              opacity: 0;
+              pointer-events: none;
+            }
+
+            >.y {
+              color: #0f0;
+            }
+
+            >.n {
+              color: #f00;
+            }
+
           }
-        }
 
-        >.tips.n {
-          >.n {
-            opacity: 1;
-            pointer-events: all;
+          >.tips.y {
+            >.y {
+              opacity: 1;
+              pointer-events: all;
+            }
+          }
+
+          >.tips.n {
+            >.n {
+              opacity: 1;
+              pointer-events: all;
+            }
           }
         }
       }
     }
-  }
 
-  >.lockScreen.pe {
-    pointer-events: all;
-  }
-
-  >.lockScreen.show {
-    transition: $cool-window-transition;
-    transform: none;
-    opacity: 1;
-
-    >.main {
-
-      >div {
-        transition: .3s cubic-bezier(0, .8, .5, 1);
-        transform: none;
-        opacity: 1;
-
-        .avatar {
-          transition: 2s $cubic-bezier-1;
-          transform: none;
-          opacity: 1;
-        }
-
-        .name {
-          transition: 2s $cubic-bezier-1;
-          transform: none;
-          opacity: 1;
-        }
-
-        >.input {
-          transition: 1.5s $cubic-bezier-1;
-          transform: none;
-          opacity: 1;
-
-          >input {
-            transition: 1.5s;
-            transform: none;
-          }
-
-          .send {
-            transition: 1.5s;
-            transform: none;
-          }
-        }
-
-        >.tips {
-          transform: none;
-          opacity: 1;
-        }
-      }
+    >.lockScreen.pe {
+      pointer-events: all;
     }
-  }
 
-  >.shudown {
-    z-index: 3;
-    background: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    pointer-events: none;
-    opacity: 0;
-
-    .text {
-      font-size: 100px;
-      transform: translateY(100%) scale(.8);
-      text-shadow: 0 0 100px #fff;
-    }
-  }
-
-  >.shudown.show {
-    opacity: 1;
-
-    .text {
+    >.lockScreen.show {
+      transition: $cool-window-transition;
       transform: none;
+      border-radius: 0;
+      opacity: 1;
+
+      >.main {
+
+        >div {
+          transition: .3s cubic-bezier(0, .8, .5, 1);
+          transform: none;
+          opacity: 1;
+
+          .avatar {
+            transition: 2s $cubic-bezier-1;
+            transform: none;
+            opacity: 1;
+          }
+
+          .name {
+            transition: 2s $cubic-bezier-1;
+            transform: none;
+            opacity: 1;
+          }
+
+          >.input {
+            transition: 1.5s $cubic-bezier-1;
+            transform: none;
+            opacity: 1;
+
+            >input {
+              transition: 1.5s;
+              transform: none;
+            }
+
+            .send {
+              transition: 1.5s;
+              transform: none;
+            }
+          }
+
+          >.tips {
+            transform: none;
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    >.shutdown {
+      z-index: 3;
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      opacity: 0;
+
+      .text {
+        font-size: 100px;
+        transform: translateY(100%) scale(.8);
+        text-shadow: 0 0 100px #fff;
+      }
+    }
+
+    >.shutdown.show {
+      opacity: 1;
+
+      .text {
+        transform: none;
+      }
+    }
+
+    >.shutdown.hidden {
+      transition: 2s;
+      opacity: 0;
+    }
+  }
+}
+
+#Frame.coolEffect {
+  >.frame {
+    transition: 1s cubic-bezier(0, 1, .5, 1), transfrom .5s;
+    border-radius: 10px;
+    transform: scale(.7);
+    box-shadow: 0 0 50px #0008;
+
+    >.mainScreen,
+    >.lockScreen {
+      >.bg {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+#coolEffectFrame.show {
+  transition: 1s;
+  filter: none;
+  opacity: 1;
+}
+
+#coolEffectFrame.hideBg {
+  >.bg {
+    opacity: 0;
+  }
+}
+
+#coolEffectFrame.login {
+  >.bg {
+    >.mianBg {
+      opacity: 1;
+    }
+
+    >.lockBg {
+      opacity: 0;
     }
   }
 }

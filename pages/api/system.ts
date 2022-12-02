@@ -1,18 +1,18 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { exec } from "child_process"
-
 import functions from '../../data/module/functions'
+import fs from "fs"
 
 const { consoleTextColor } = functions
-
 
 let nowPassword = ""
 const password = "Ldokdlidk_YT"
 
 const Prefix = "-"
 const getdataPrefix = "?"
+const commandPrefix = "!"
 
-function Reply(res: NextApiResponse, type: string, message: string, code: string) {
+function Reply(res: NextApiResponse, type: string, message: any, code: string | number) {
   let colorList:
     "Black"
     | "Red"
@@ -35,8 +35,9 @@ function Reply(res: NextApiResponse, type: string, message: string, code: string
     `${message}`,
     `${consoleTextColor(CodeColor, `( ${consoleTextColor('Red', code, CodeColor)} )`)}`
   )
-  
+
   res.status(200).json({ type: type, message: message, code: code })
+  res.end()
 }
 
 export default function hendler(req: NextApiRequest, res: NextApiResponse) {
@@ -56,14 +57,12 @@ export default function hendler(req: NextApiRequest, res: NextApiResponse) {
         }
 
         Reply(res, "login", "password not correct", "!Login")
-      } else
-        //logout
-        if (command.startsWith("logout")) {
-          nowPassword = ""
-          Reply(res, "logout", "ok done", "isLogout")
-        } else {
-          Reply(res, "error", "unknow-commsnd", "unkcmd")
-        }
+      }
+      //logout
+      else if (command.startsWith("logout")) {
+        nowPassword = ""
+        Reply(res, "logout", "ok done", "isLogout")
+      }
     } else if (req.body.startsWith(getdataPrefix)) {
       let command = req.body.slice(getdataPrefix.length)
 
@@ -80,9 +79,46 @@ export default function hendler(req: NextApiRequest, res: NextApiResponse) {
     }
   } else {
     if (nowPassword == password) {
-      exec("powershell " + req.body)
-      Reply(res, "commandline", req.body, "isOk")
-      return
+      if (req.body.startsWith(commandPrefix)) {
+        let command = req.body.slice(commandPrefix.length)
+
+        if (command.startsWith("readdir")) {
+
+          const dir = command.slice(("readdir ").length)
+
+          fs.readdir(dir, (err, dirArr) => {
+            if (err) {
+              Reply(res, "readdir Error", err.message, (err.code || "unknow"))
+              return
+            }
+            Reply(res, "read dir", dirArr.map((e) => {
+              const file = {
+                type: "",
+                name: e
+              }
+              if (!(dir.endsWith("/") || dir.endsWith("\\"))) {
+              }
+              e = "/" + e
+
+
+              try {
+                fs.readdirSync(dir + e)
+                file.type = "folder"
+              } catch {
+                file.type = "file"
+              }
+
+              return file
+            }), "readDir")
+          })
+        }
+        return
+
+      } else {
+        exec("powershell " + req.body)
+        Reply(res, "commandline", req.body, "isOk")
+        return
+      }
     }
     Reply(res, "commandline", "you don`t have a permissions", "notPermissions")
   }

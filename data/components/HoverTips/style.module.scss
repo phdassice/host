@@ -10,12 +10,12 @@
   #hoverTips2 {
     position: fixed;
     z-index: 99999;
-    padding: 2px 5px;
+    padding: 5px 10px;
     font-size: 15px;
-    transform: translate(10%, 0%) scale(.8);
+    transform: translate(10%, 25%) scale(.8);
     border-radius: 5px;
     backdrop-filter: blur($blur-effect);
-    background: Color(.5, .5);
+    background: Color(.5, .1);
     pointer-events: none;
     box-shadow: 0 0 10px #0008;
     opacity: 0;
@@ -26,8 +26,8 @@
     overflow: hidden;
     transition:
       all $transition-duration $transition-timing-function $transition-delay,
-      opacity $transition-duration ease-in-out .3s,
-      transform $transition-duration ease-in .4s,
+      opacity $transition-duration ease-in-out .4s,
+      transform $transition-duration cubic-bezier(.5,0,1,0) .3s,
       width .5s $transition-timing-function .3s,
       height .5s $transition-timing-function .3s, ;
 
@@ -38,19 +38,18 @@
   }
 
   #hoverTips.show {
-
     transform: translate(10%, -100%);
     opacity: 1;
     transition:
       all $transition-duration $transition-timing-function $transition-delay,
-      opacity .3s ease-in-out .3s,
-      transform .3s $transition-timing-function .3s,
+      opacity .3s ease-in-out 1s,
+      transform .3s $transition-timing-function 1s,
       width .5s $transition-timing-function 0s,
       height .5s $transition-timing-function 0s, ;
   }
 
   #hoverTips.top {
-    transform: translate(25%, 100%) scale(.8);
+    transform: translate(25%, 100%);
   }
 
   #hoverTips.top.show {
