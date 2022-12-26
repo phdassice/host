@@ -6,7 +6,7 @@ import fs from "fs"
 const { consoleTextColor } = functions
 
 let nowPassword = ""
-const password = "Ldokdlidk_YT"
+const password = "111039"
 
 const Prefix = "-"
 const getdataPrefix = "?"
