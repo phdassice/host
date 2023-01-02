@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/system.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/api/system.ts", "Progiles/Profile.tsx", "../../../../../../../OneDrive/桌面/owo/Profile/type.d.ts"],
   "exclude": ["node_modules"]
 }

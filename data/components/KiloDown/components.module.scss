@@ -1,0 +1,271 @@
+@import "../../../styles/value.scss";
+
+.After {
+  clip-path: polygon(0 0, 0% 100%, 100% 0);
+  background-color: Color(.7);
+  width: 10px;
+}
+
+.Before {
+  width: 5px;
+  background-color: Color(.7);
+}
+
+.ClipLine {
+  background-color: Color();
+  clip-path: polygon(50% 0, 100% 0%, 50% 100%, 0% 100%);
+  color: #0000;
+}
+
+.ClipLineText {
+  clip-path: polygon(50% 0, 100% 0%, 50% 100%, 0% 100%);
+  background-color: Color();
+  padding: 0 6px;
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
+.ClipLineText2 {
+  clip-path: polygon(25% 0, 75% 0, 75% 100%, 25% 100%);
+  background-color: Color();
+  padding: 0 6px;
+  margin-left: 5px;
+  margin-right: 10px;
+}
+
+.ClipLineLarge {
+  clip-path: polygon(0.2% 0, 100% 0%, 99.8% 100%, 0% 100%);
+  background-color: Color(.4);
+  color: Color();
+  padding: 5px;
+  margin: 10px 10px;
+  font-size: 20px;
+  text-align: center;
+  display: block;
+}
+
+.ClipLineLarge:hover {
+  background-color: Color(.5);
+  margin: 10px 0;
+  letter-spacing: 5px;
+  text-shadow: 0 0 10px Color();
+}
+
+.ClipLineLarge[set-title] {
+  clip-path: none;
+  border-radius: 5px;
+}
+
+
+.ClipLineSpace {
+  display: block;
+  margin: 15px 0;
+}
+
+.InnerContent {
+  background-color: Color(.2, .2);
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  display: block;
+}
+
+.HideText {
+  transition: .3s cubic-bezier(0, .5, 0, 1);
+  background-color: Color(.2);
+  color: #0000;
+  padding: 0 5px;
+  border-radius: 5px;
+  outline: 1px solid Color(.5);
+}
+
+.HideText:hover {
+  background-color: Color(.4);
+  color: #fff;
+}
+
+.HideText:active {
+  background-color: Color(.2);
+  text-shadow: 0 0 10px Color();
+  color: Color();
+}
+
+.HideText::selection {
+  background-color: #0000;
+  color: #0000;
+}
+
+.HideText:hover::selection,
+.HideText:active::selection {
+  background: Color(.3);
+  color: LightColor(.5);
+}
+
+
+.EmpText {
+  padding: 0 15px;
+  margin: 5px;
+  background-color: Color(.4);
+  border-radius: 5px;
+}
+
+.EmpText:hover {
+  color: Color();
+  background-color: Color(.5);
+  text-shadow: 0 0 10px Color();
+}
+
+.CodeText {
+  font-family: monospace;
+  padding: 0 15px;
+  margin: 0 5px;
+  border: 2px solid Color(.5);
+  border-radius: 5px;
+}
+
+.CodeText:hover {
+  color: Color();
+  background-color: #0000;
+  border-color: Color();
+  text-shadow: 0 0 10px Color(.7);
+}
+
+
+
+.Title {
+  display: flex;
+  margin: 5px 0;
+
+  * {
+    transition: .3s cubic-bezier(0, .5, 0, 1);
+  }
+
+  >.Before {
+    background-color: Color(.2);
+    display: grid;
+
+    span {
+      width: 15px;
+      clip-path: polygon(100% 0, 50% 50%, 100% 100%, 0 100%, 0 0);
+      background-color: Color(.7);
+    }
+  }
+
+  >.Text {
+    font-size: 25px;
+    letter-spacing: 2px;
+    padding: 5px 40px;
+    color: #fff;
+    background-color: Color(.2);
+  }
+
+  >.After {
+    background-color: Color(.2);
+
+  }
+
+  >.ClipLine {
+    background-color: Color(.7);
+    width: 20px;
+  }
+}
+
+.Title:hover {
+
+  >.Before {
+    background-color: Color(.5);
+
+    span {
+      width: 15px;
+      clip-path: polygon(50% 0, 100% 0, 25% 100%, 0 100%, 0 0);
+      background-color: Color();
+
+    }
+  }
+
+  >.Text {
+    padding: 5px 80px 5px 60px;
+    background-color: Color(.5);
+    color: Color();
+    text-shadow: 0 0 10px Color();
+  }
+
+  >.After {
+    background-color: Color(.5);
+  }
+
+  >.ClipLine {
+    background-color: Color();
+    margin: 0 10px;
+  }
+
+}
+
+
+.Subtitle {
+  display: flex;
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  * {
+    transition: .3s cubic-bezier(0, .5, 0, 1);
+  }
+
+  >.Before {
+    width: 5px;
+    background-color: Color(.7);
+  }
+
+  >.Text {
+    letter-spacing: 2px;
+    font-size: 20px;
+    padding: 5px 30px;
+    color: #fff;
+    background-color: Color(.4);
+  }
+
+  >.After {
+    width: 10px;
+    background-color: Color(.4);
+  }
+}
+
+.Subtitle:hover {
+
+  >.Before {
+    width: 8px;
+    background-color: Color();
+  }
+
+  >.Text {
+    padding: 5px 80px 5px 50px;
+    background-color: Color(.5);
+    color: Color();
+    text-shadow: 0 0 10px Color();
+  }
+
+  >.After {
+    background-color: Color(.5);
+  }
+
+}
+
+
+
+.Page {
+  transition: .2s cubic-bezier(1, 0, 0, 1);
+  grid-area: pages;
+  font-size: 20px;
+  margin: 10px;
+  padding: 10px;
+  overflow: auto;
+  transform: scale(1.1);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.Page.Show {
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: all;
+}

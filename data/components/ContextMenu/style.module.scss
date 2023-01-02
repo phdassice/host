@@ -1,0 +1,91 @@
+@import "../../../styles/value.scss";
+
+$top-left-transition: top 0s, left 0s;
+
+#menu {
+  z-index: 999999;
+  transition: all .1s ease-out, top 0s, left 0s;
+  position: fixed;
+  transform: translateY(25%) scale(.8);
+  opacity: 0;
+  display: grid;
+  width: 200px;
+  background-color: Color(.1, .1);
+  backdrop-filter: blur($blur-effect);
+  border-radius: 5px;
+  box-shadow: 0 0 10px #0008;
+  overflow: hidden;
+  padding: 10px 0;
+  pointer-events: none;
+
+  button {
+    padding: 5px 10px;
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+
+    .hotkey {
+      margin-left: auto;
+      color: LightColor(.8, .5);
+    }
+
+    .name {
+      color: LightColor(.8);
+    }
+
+    svg {
+      margin-right: 5px;
+      fill: LightColor(.8);
+    }
+  }
+
+  button:hover {
+    background-color: LightColor(.8, .1);
+
+    .hotkey {
+      margin-left: auto;
+      color: Color(1, .5);
+    }
+
+    .name {
+      color: Color();
+    }
+
+    svg {
+      margin-right: 5px;
+      fill: Color();
+    }
+  }
+
+  button:active {
+    background-color: Color(.8, .1);
+
+    .hotkey {
+      margin-left: auto;
+      color: Color(.5, .5);
+    }
+
+    .name {
+      color: Color(.5);
+    }
+
+    svg {
+      margin-right: 5px;
+      fill: Color(.5);
+    }
+  }
+
+  .ClipLine {
+    height: 2px;
+    margin: 5px 8px;
+    background-color: Color(.2);
+  }
+}
+
+#menu.show {
+  transition: all .5s cubic-bezier(0, .5, 0, 1), $top-left-transition;
+  opacity: 1;
+  transform: none;
+  pointer-events: all;
+}

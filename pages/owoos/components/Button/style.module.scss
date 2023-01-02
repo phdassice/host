@@ -1,0 +1,133 @@
+@import "../../../../styles/value.scss";
+
+$size: 64px;
+$border-size: 5px;
+
+$scale: .8;
+$scale-hover: 1;
+$scale-active: .9;
+
+$scale-for-power:.1;
+
+
+.mainButton {
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur($blur-effect);
+    border: none;
+    outline: none;
+    background-color: Color(.1, .05);
+  }
+
+  svg {
+    filter: drop-shadow(5px 5px 0 Color(.1));
+    transform: scale($scale);
+    fill: LightColor(.8);
+  }
+}
+
+.mainButton:hover {
+
+  .icon {
+    background-color: Color(1, .08);
+
+    svg {
+      transform: scale($scale-hover);
+      fill: Color(1);
+    }
+  }
+}
+
+.mainButton:active {
+  .icon {
+    background-color: Color(.08, .5);
+
+    svg {
+      filter: drop-shadow(0px 0px 0 Color(.1));
+      transform: scale($scale-active);
+      fill: Color(.5);
+    }
+  }
+}
+
+.mainButton[btn-sty="main"] {
+  margin: 25px;
+
+  .icon {
+    width: $size;
+    height: $size - 10px;
+    border-radius: 5px;
+  }
+
+  .title {
+    text-shadow: 0 0 20px #000a;
+    text-align: center;
+    margin-top: 5px;
+    font-size: 10px;
+  }
+}
+
+
+.mainButton[btn-sty="bar"] {
+  .icon {
+    width: $size + 15px;
+    height: $size - 5px;
+    border-bottom: $border-size solid Color(.5);
+  }
+
+  .title {
+    display: none;
+  }
+}
+
+.mainButton[btn-sty="bar"]:hover {
+  .icon {
+    border-color: Color();
+  }
+}
+
+.mainButton[btn-sty="bar"]:active {
+  .icon {
+    border-color: Color(.3);
+  }
+}
+
+.mainButton[btn-sty="power"] {
+  .icon {
+    width: $size + 10px;
+    height: $size + 10px;
+    clip-path: polygon(0 0, 100% 8%, 100% 100%, 0 92%);
+    border-left: $border-size solid Color(.5);
+  }
+
+
+  svg {
+    transform: scale($scale + $scale-for-power);
+  }
+
+  .title {
+    display: none;
+  }
+}
+
+.mainButton[btn-sty="power"]:hover {
+  .icon {
+    border-color: Color();
+  }
+
+  svg {
+    transform: scale($scale-hover + $scale-for-power);
+  }
+}
+
+.mainButton[btn-sty="power"]:active {
+  .icon {
+    border-color: Color(.3);
+  }
+
+  svg {
+    transform: scale($scale-active + $scale-for-power);
+  }
+}

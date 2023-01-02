@@ -1,0 +1,450 @@
+ @import "../../../../styles/value.scss";
+
+ #mainFrame {
+   overflow: hidden;
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   display: grid;
+   background: #fff;
+   grid-template-rows: auto 1fr;
+
+
+   #memeText {
+     overflow: hidden;
+     display: flex;
+     align-items: stretch;
+     flex-direction: column;
+     height: 0px;
+
+     input {
+       color: #000;
+       border: none;
+       background: none;
+       border-radius: 5px;
+       margin: 10px;
+       font-size: 25px;
+       box-shadow: none;
+     }
+
+     input:hover {
+       transform: none;
+       text-shadow: none;
+       box-shadow: none;
+     }
+
+     input:focus {
+       color: Color(.2);
+       transform: none;
+       box-shadow: none;
+     }
+   }
+
+
+   #main {
+     overflow: hidden;
+     display: grid;
+     grid-template-areas: "ctn";
+
+     >* {
+       grid-area: ctn;
+     }
+
+     #bg {
+       z-index: 1;
+       overflow: hidden;
+       display: grid;
+       grid-template-areas: "ele";
+       opacity: 1;
+       pointer-events: none;
+       background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+       $snowTotal: 100;
+
+       $gap: 50px;
+       $transition-duration: 2s;
+
+       >* {
+         grid-area: ele;
+         overflow: hidden;
+       }
+
+       >.snowEffect {
+         z-index: 1;
+       }
+
+       >.text {
+         z-index: 2;
+         font-size: 100px;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         gap: $gap;
+         transition-duration: $transition-duration;
+
+         >* {
+           transition-duration: $transition-duration;
+         }
+
+         .typeB {
+           letter-spacing: $gap;
+         }
+
+         div {
+           color: #0000;
+           background: Color();
+           background: linear-gradient(0, #0000 18%, Color() 100%);
+           background-clip: text;
+         }
+       }
+
+       >.snowEffect2 {
+         z-index: 3;
+       }
+
+       >.snowEffect,
+       >.snowEffect2 {
+         filter: drop-shadow(0 0 10px white);
+
+         @function random_range($min, $max) {
+           $rand: random();
+           $random_range: $min +floor($rand * (($max - $min) + 1));
+           @return $random_range;
+         }
+
+         .snow {
+           $total: $snowTotal;
+           position: absolute;
+           width: 10px;
+           height: 10px;
+           background: white;
+           border-radius: 50%;
+
+           @for $i from 1 through $total {
+             $random-x: random(1000000) * 0.0001vw;
+             $random-offset: random_range(-100000, 100000) * 0.0001vw;
+             $random-x-end: $random-x +$random-offset;
+             $random-x-end-yoyo: $random-x +($random-offset / 2);
+             $random-yoyo-time: random_range(30000, 80000) / 100000;
+             $random-yoyo-y: $random-yoyo-time * 100vh;
+             $random-scale: random(10000) * 0.0001;
+             $fall-duration: random_range(10, 30) * 1s;
+             $fall-delay: random(30) * -1s;
+
+             &:nth-child(#{$i}) {
+               opacity: random(10000) * 0.0001;
+               transform: translate($random-x, -10px) scale($random-scale);
+               animation: fall-#{$i} $fall-duration $fall-delay linear infinite;
+             }
+
+             @keyframes fall-#{$i} {
+               #{percentage($random-yoyo-time)} {
+                 transform: translate($random-x-end, $random-yoyo-y) scale($random-scale);
+               }
+
+               to {
+                 transform: translate($random-x-end-yoyo, 100vh) scale($random-scale);
+               }
+             }
+           }
+         }
+       }
+     }
+
+     #menu {
+       z-index: 2;
+      //  opacity: 0;
+       display: grid;
+       grid-template-rows: 1fr 19fr auto;
+       overflow: hidden;
+
+       >.title {
+         backdrop-filter: blur($blur-effect);
+         display: grid;
+         grid-template-areas: "ttle";
+
+         >* {
+           grid-area: ttle;
+         }
+
+         .title {
+           display: flex;
+           align-items: center;
+           justify-content: center;
+           font-size: 25px;
+
+           .text1 {
+             color: Color();
+             width: 75.91px;
+             transition: 1.5s cubic-bezier(1, 0, 0, 1);
+             word-break: keep-all;
+             overflow: hidden;
+           }
+
+           .text2 {
+             color: Color();
+             text-shadow: 0 0 20px Color();
+             transition-duration: 1s;
+             word-break: keep-all;
+           }
+
+           .line {
+             width: 40%;
+             height: 10px;
+             background-color: #fff;
+             margin: 10px;
+             background: Color();
+             background: linear-gradient(90deg, rgba(0, 0, 0, 0) 15%, Color() 100%);
+           }
+         }
+       }
+
+       .menu {
+         overflow: auto;
+         margin: 5px;
+       }
+     }
+
+     #smallBar {
+       margin: 5px;
+     }
+   }
+
+ }
+
+ #mainFrame.memetext {
+   * {
+     transition: 1s $transition-timing-function;
+   }
+
+   #memeText {
+     height: 59px;
+   }
+
+   #main {
+     transform: scale(.98);
+
+     #menu {
+       .title {
+         backdrop-filter: none;
+       }
+     }
+   }
+ }
+
+ .MenuButton {
+   backdrop-filter: blur($blur-effect);
+   background-color: LightColor(.1, .1);
+   border-radius: 5px;
+   margin: 5px;
+   display: grid;
+   grid-template-areas: "area";
+   height: 100px;
+   overflow: hidden;
+
+   >* {
+     grid-area: area;
+     pointer-events: none;
+   }
+
+   .main {
+     display: grid;
+     grid-template-columns: auto 1fr;
+     border-radius: 5px;
+     overflow: hidden;
+
+     transition: .6s cubic-bezier(0, .5, 0, 1).3s;
+
+     .icon {
+       z-index: 1;
+       display: grid;
+       grid-template-areas: "img";
+
+       >.img {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         grid-area: img;
+
+         >.img {
+           width: 90px;
+           height: 90px;
+           margin: 5px;
+           background-color: linear-gradient(139deg, Color(.9) 27%, Color(.8) 100%);
+           background-position: center;
+           background-size: cover;
+           z-index: 2;
+           border-radius: 5px;
+         }
+
+         >.blur {
+           width: 90px;
+           height: 90px;
+           margin: 5px;
+           background-position: center;
+           background-size: cover;
+           filter: blur(10px);
+           transform: scale(2);
+           z-index: 1;
+         }
+       }
+     }
+
+     .description {
+       z-index: 2;
+       display: flex;
+       flex-direction: column;
+       gap: 5px;
+       margin: 5px;
+       overflow: hidden;
+       filter: drop-shadow(0 0 5px #000);
+
+       >*>div {
+         overflow: hidden;
+         text-overflow: ellipsis;
+         white-space: nowrap;
+       }
+
+       .title {
+         font-size: 20px;
+       }
+
+       .description {
+         font-size: 15px;
+       }
+     }
+   }
+
+   .hover {
+     overflow: hidden;
+     opacity: 0;
+     transform: scale(2);
+     display: grid;
+     grid-template-areas: "area";
+     $transition: .3s cubic-bezier(1, 0, 1, 0);
+     transition: $transition;
+
+     >* {
+       grid-area: area;
+     }
+
+     .img {
+       background-position: center;
+       background-size: cover;
+       opacity: .2;
+       filter: blur(30px);
+       transform: scale(1.1);
+     }
+
+     .description {
+       display: flex;
+       align-items: center;
+       justify-content: center;
+       flex-direction: column;
+       overflow: hidden;
+       gap: 10px;
+       transition: $transition;
+       transition-delay: .3s;
+
+       >* {
+         overflow: hidden;
+       }
+
+       >*>div {
+         overflow: hidden;
+         text-overflow: ellipsis;
+         white-space: nowrap;
+       }
+
+       .title {
+         font-size: 20px;
+       }
+
+       .description {
+         font-size: 15px;
+       }
+     }
+   }
+ }
+
+ .MenuButton:hover {
+   .main {
+     transform: translateX(-100%);
+     transition: .3s cubic-bezier(1, 0, 1, 0) 0s;
+   }
+
+   .hover {
+     opacity: 1;
+     transform: scale(1);
+     $transition: 1s cubic-bezier(0, 1, 0, 1) .25s;
+     transition: $transition;
+
+     .description {
+       transition: $transition;
+     }
+   }
+ }
+
+ @media (max-width:850px) {
+   #menu>.title>.title {
+     .text1 {
+       width: 0px !important;
+     }
+
+     .text2 {
+       transform: scale(1.2);
+       margin: 0 10px;
+     }
+   }
+ }
+
+ @media (max-width:400px) {
+   #bg>* {
+     gap: 0px !important;
+   }
+
+   #menu>.title>.title {
+     .text2 {
+       transform: scale(1);
+       margin: 0px;
+     }
+
+     .line {
+       width: 0% !important;
+       opacity: 0;
+     }
+   }
+
+   .MenuButton {
+     height: 190px;
+
+     .main {
+       grid-template-columns: 1fr;
+       grid-template-rows: auto 1fr;
+
+       .icon {
+         background: Color(.3, .3);
+         margin-bottom: 5px;
+         overflow: hidden;
+
+         .img {
+           margin: 10px;
+
+           .blur {
+             opacity: .3;
+             transform: scale(4.08);
+             filter: blur(5px);
+           }
+         }
+       }
+
+       .description {
+         .title {
+           text-align: center;
+         }
+       }
+     }
+   }
+ }

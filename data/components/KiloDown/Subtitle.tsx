@@ -4,7 +4,7 @@ import { ReactNode } from 'react'
 import Before from "./Before"
 import After from "./After"
 
-import style from "../styles/other/components.module.scss"
+import style from "./components.module.scss"
 
 interface SubtitleProp {
     children?: ReactNode

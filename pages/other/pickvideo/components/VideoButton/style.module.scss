@@ -1,0 +1,60 @@
+@import "../../../../../styles/value.scss";
+
+.button {
+  width: 400px;
+  height: auto;
+  background-color: Color(.2);
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+
+  .thumbnai {
+    height: 200px;
+    border-radius: 5px;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+
+    .video {
+      .title {
+        font-size: 18px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      .uploadDate {
+        opacity: .3;
+      }
+    }
+
+    .user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      .avatar {
+        $size: 30px;
+        width: $size;
+        height: $size;
+        background-size: cover;
+        background-position: center;
+        border-radius: 50%;
+      }
+
+      .name {
+        font-size: 18px;
+      }
+    }
+  }
+}
+
+.button:hover {
+  background-color: Color(.3);
+}

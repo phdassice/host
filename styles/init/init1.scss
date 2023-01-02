@@ -6,8 +6,8 @@
 }
 
 ::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
+    width: 15px;
+    height: 15px;
 }
 
 ::-webkit-scrollbar-track {
@@ -15,12 +15,14 @@
 }
 
 ::-webkit-scrollbar-thumb {
-    background: Color(.7);
-    border-radius: 5px;
+    border-radius: 10px;
+    border: 5px solid transparent;
+    background-clip: content-box;
+    background-color: Color(.7);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: Color();
+    background-color: Color();
 }
 
 :focus-visible {

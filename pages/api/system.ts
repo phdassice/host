@@ -1,16 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { exec } from "child_process"
 import functions from '../../data/module/functions'
-import fs from "fs"
+import type { SystemCommand, Command, GetData } from './type/system'
 
 const { consoleTextColor } = functions
 
 let nowPassword = ""
-const password = "111039"
-
-const Prefix = "-"
-const getdataPrefix = "?"
-const commandPrefix = "!"
+const password = "uwu"
 
 function Reply(res: NextApiResponse, type: string, message: any, code: string | number) {
   let colorList:
@@ -41,84 +37,49 @@ function Reply(res: NextApiResponse, type: string, message: any, code: string | 
 }
 
 export default function hendler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.body.startsWith(Prefix) || req.body.startsWith(getdataPrefix)) {
+  const command: SystemCommand | Command | GetData = JSON.parse(req.body)
 
-    if (req.body.startsWith(Prefix)) {
-      let command = req.body.slice(Prefix.length)
+  if (command.type == "Command") {
 
-      //login
-      if (command.startsWith("login")) {
+    if (command.cmd.type == "login") {
+      nowPassword = command.cmd.password
 
-        nowPassword = command.slice(("login ").length)
-
-        if (nowPassword == password) {
-          Reply(res, "login", "oh yeh you login!", "Login")
-          return
-        }
-
-        Reply(res, "login", "password not correct", "!Login")
+      if (nowPassword == password) {
+        Reply(res, "login", "oh yeh you login!", "Login")
+        return
       }
-      //logout
-      else if (command.startsWith("logout")) {
-        nowPassword = ""
-        Reply(res, "logout", "ok done", "isLogout")
-      }
-    } else if (req.body.startsWith(getdataPrefix)) {
-      let command = req.body.slice(getdataPrefix.length)
 
-      //isLogin
-      if (command.startsWith("isLogin")) {
-        if (nowPassword == password) {
-          Reply(res, "isLogin?", "yes, you login", "isLogin")
-          return
-        }
-        Reply(res, "isLogin?", "no, you not login", "!isLogin")
-      } else {
-        Reply(res, "error", "unknow-commsnd", "unkcmd")
-      }
+      Reply(res, "login", "password not correct", "!Login")
     }
-  } else {
-    if (nowPassword == password) {
-      if (req.body.startsWith(commandPrefix)) {
-        let command = req.body.slice(commandPrefix.length)
 
-        if (command.startsWith("readdir")) {
+    else if (command.cmd.type == "logout") {
+      nowPassword = ""
+      Reply(res, "logout", "ok done", "isLogout")
+    }
 
-          const dir = command.slice(("readdir ").length)
+    else {
+      Reply(res, "error", "unknow-commsnd", "unkcmd")
+    }
 
-          fs.readdir(dir, (err, dirArr) => {
-            if (err) {
-              Reply(res, "readdir Error", err.message, (err.code || "unknow"))
-              return
-            }
-            Reply(res, "read dir", dirArr.map((e) => {
-              const file = {
-                type: "",
-                name: e
-              }
-              if (!(dir.endsWith("/") || dir.endsWith("\\"))) {
-              }
-              e = "/" + e
+  } else if (command.type == "GetData") {
 
-
-              try {
-                fs.readdirSync(dir + e)
-                file.type = "folder"
-              } catch {
-                file.type = "file"
-              }
-
-              return file
-            }), "readDir")
-          })
-        }
-        return
-
-      } else {
-        exec("powershell " + req.body)
-        Reply(res, "commandline", req.body, "isOk")
+    if (command.cmd.type == "isLogin") {
+      if (nowPassword == password) {
+        Reply(res, "isLogin?", "yes, you login", "isLogin")
         return
       }
+      Reply(res, "isLogin?", "no, you not login", "!isLogin")
+    }
+
+    else {
+      Reply(res, "error", "unknow-commsnd", "unkcmd")
+    }
+
+  } else if (command.type == "SystemCommand") {
+    if (nowPassword == password) {
+      exec(command.cmd)
+      Reply(res, "commandline", command.cmd, "isOk")
+      return
     }
     Reply(res, "commandline", "you don`t have a permissions", "notPermissions")
   }

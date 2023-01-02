@@ -1,12 +1,6 @@
-@use "sass:map";
+@import "./profile/color.scss";
 
-$blur-effect:50px;
-
-$theme-color-r: 255;
-$theme-color-g: 255;
-$theme-color-b: 255;
-
-
+$blur-effect: 50px;
 
 @function Color($num : 1, $opacit : 1) {
     @return rgba($theme-color-r * $num, $theme-color-g * $num, $theme-color-b* $num, $opacit );
@@ -16,7 +10,7 @@ $theme-color-b: 255;
     @return rgba($theme-color-r + (255 * $num ), $theme-color-g + (255 * $num ), $theme-color-b + (255 * $num ), $opacit );
 }
 
-$transition-duration: .4s;
+$transition-duration: .5s;
 $transition-delay: 0s;
 $transition-timing-function: cubic-bezier(0, .5, 0, 1);
 

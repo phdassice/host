@@ -1,0 +1,132 @@
+@import "../../../styles/value.scss";
+
+$height: 50px;
+
+#Frame {
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  display: grid;
+  overflow: hidden;
+
+  grid-template-areas: "area";
+
+  >* {
+    grid-area: area;
+    overflow: hidden;
+  }
+
+  .bar {
+    height: $height;
+    background-color: Color(.2, .5);
+    display: grid;
+    grid-template-areas: "area";
+
+    >* {
+      grid-area: area;
+      overflow: hidden;
+      display: flex;
+      pointer-events: none;
+
+      >* {
+        pointer-events: all;
+      }
+    }
+
+    .logo {
+      justify-content: start;
+      padding: 10px;
+
+      >a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        >* {
+          $color: Color(.3);
+          fill: $color;
+          color: $color;
+        }
+
+        .img {
+          transform: scale(1.1);
+        }
+
+        .name {
+          font-size: 18px;
+        }
+      }
+    }
+
+    .logo:hover {
+      >a {
+        filter: drop-shadow(0 0 10px Color(.5));
+
+        >* {
+          $color: Color();
+          fill: $color;
+          color: $color;
+        }
+      }
+    }
+  }
+
+  .videos {
+    $margin: 10px;
+    gap: 10px;
+    margin: $margin;
+    margin-top: $height + $margin;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    flex-direction: row;
+    overflow: auto;
+
+    .noting {
+      font-size: 100px;
+      transform: translateY(100%);
+      color: Color();
+      animation: 4s ease-in-out 0s infinite normal none running noting;
+    }
+    .error {
+      text-align: center;
+      font-size: 100px;
+      transform: translateY(50%);
+      color: #f00;
+      animation: 4s ease-in-out 0s infinite normal none running error;
+    }
+  }
+}
+
+@keyframes noting {
+  0% {
+    text-shadow: 0 0 10px Color(.5);
+  }
+
+  50% {
+    text-shadow: 0 0 20px Color();
+  }
+
+  100% {
+    text-shadow: 0 0 10px Color(.5);
+  }
+}
+
+@keyframes error {
+  0% {
+    text-shadow: 0 0 10px #800;
+  }
+
+  50% {
+    text-shadow: 0 0 20px #f00;
+  }
+
+  100% {
+    text-shadow: 0 0 10px #800;
+  }
+}

@@ -5,6 +5,7 @@ import style from "./style.module.scss";
 const HoverTips: NextPage = () => {
   useEffect(() => {
     const tips = document.getElementById(style.hoverTips)!;
+    const tips2 = document.getElementById(style.hoverTips2)!
 
     document.addEventListener("mousemove", (e) => {
       const X = e.clientX;
@@ -15,16 +16,21 @@ const HoverTips: NextPage = () => {
         tipsStyle.left = X + "px"
       };
 
-      if (Y < 30) {
+      if (Y < tips2.offsetHeight + 10) {
         tips.classList.add(style.top)
       } else {
         tips.classList.remove(style.top)
+      }
+
+      if (X < tips2.offsetWidth / 2 + 10) {
+        tips.classList.add(style.left)
+      } else {
+        tips.classList.remove(style.left)
       }
     });
 
     document.querySelectorAll("[hover-tips]").forEach(e => {
       e.addEventListener("mouseenter", () => {
-        const tips2 = document.getElementById(style.hoverTips2)!
 
         tips.innerHTML = e.getAttribute("hover-tips")!;
         tips2.innerHTML = e.getAttribute("hover-tips")!;

@@ -1,8 +1,10 @@
+import type functions from "./type/functions"
+
 export default {
-  fetch: function (type: "system", body: string, onRes?: (res: any) => void) {
-    fetch("api/" + type, {
+  fetch: function (type: functions.FetchKiloType | functions.FetchSystemType | functions.FetchYtType | functions.FetchGetLogType , onRes?: (res: any) => void) {
+    fetch("/api/" + type.type, {
       method: "POST",
-      body: body
+      body:JSON.stringify(type.options || {})
     }).then(
       async res => {
         if (onRes) {

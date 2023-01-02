@@ -1,0 +1,67 @@
+@import "../styles/value.scss";
+
+$height: 50px;
+
+.bar {
+  z-index: 10;
+  pointer-events: none;
+  top: 0;
+  width: 100%;
+  position: fixed;
+
+  >div {
+    pointer-events: all;
+    height: $height;
+    backdrop-filter: blur($blur-effect);
+    background-color: Color(.2, .5);
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 25px Color(.06);
+
+    display: grid;
+    grid-template-columns: auto 1fr;
+    overflow: hidden;
+
+    .link {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: Color(.2, .5);
+      $padding: 30px;
+      transform: translate(-10px);
+      padding-left: $padding;
+      padding-right: $padding;
+      clip-path: polygon(0 0, 100% 0%, 90% 100%, 0% 100%);
+    }
+
+    .link:hover {
+      transform: none;
+    }
+
+    .link:hover {
+      background-color: Color(.5, .8);
+    }
+
+    .title {
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 25px;
+
+      >div {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}
+
+.main {
+  z-index: 1;
+  font-size: 20px;
+  margin: 5px;
+  padding: 5px;
+  margin-top: $height + 10px;
+}

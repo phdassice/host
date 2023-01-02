@@ -1,0 +1,136 @@
+@import "../../../../styles/value.scss";
+
+.SaveMusic {
+  display: grid;
+  grid-template-areas: "area";
+  overflow: hidden;
+  background: #000;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  margin-right: 5px;
+
+  >* {
+    grid-area: area;
+  }
+
+  >.bg {
+    z-index: 1;
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.5);
+    filter: blur(200px);
+    opacity: .5;
+  }
+
+  >.main {
+    z-index: 2;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    overflow: hidden;
+
+    >.author {
+      background-color: #0008;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+
+      >.avatar {
+        z-index: 1;
+        $size : 100px;
+        width: $size;
+        height: $size;
+        border-radius: 10px;
+
+        display: grid;
+        grid-template-areas: "area";
+
+        >* {
+          grid-area: area;
+          background-size: cover;
+          background-position: center;
+        }
+
+        >.main {
+          transform: scale(.8);
+          border-radius: 10px;
+          filter: drop-shadow(0 0 50px #0008);
+        }
+
+        >.shadow {
+          transform: scale(3);
+          filter: blur(50px);
+          opacity: .8;
+        }
+      }
+
+      >.name {
+        z-index: 2;
+        font-size: 30px;
+        text-shadow: 0 0 20px #000;
+        margin-left: 10px;
+      }
+    }
+
+    >.main {
+      margin: 5px;
+      border-radius: 10px;
+      overflow: auto;
+
+      >.music {
+        overflow: hidden;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        display: grid;
+        grid-template-areas: "area";
+        overflow: hidden;
+        background: #000;
+
+        >* {
+          grid-area: area;
+        }
+
+        >.bg {
+          background-size: cover;
+          background-position: center;
+          filter: blur(30px);
+          transform: scale(1.5);
+        }
+
+        >.main {
+          display: flex;
+          align-items: center;
+
+          >.cover {
+            z-index: 1;
+            $size : 70px;
+            width: $size;
+            height: $size;
+            border-radius: 10px;
+
+            display: grid;
+            grid-template-areas: "area";
+
+            >* {
+              grid-area: area;
+              background-size: cover;
+              background-position: center;
+            }
+
+            >.main {
+              transform: scale(.8);
+              border-radius: 10px;
+              filter: drop-shadow(0 0 50px #0008);
+            }
+          }
+
+          >.name {
+            z-index: 2;
+            text-shadow: 0 0 20px #000;
+            font-size: 20px;
+            margin-left: 10px;
+          }
+        }
+      }
+    }
+  }
+}
